@@ -1,0 +1,7 @@
+.idea/
+/data/wwwroot/*
+!/data/wwwroot/test1/
+/data/server/dnsmasq/dnsmasq.conf
+/data/server/mysql/*/data/*
+/data/server/mysql/*/config/my.cnf
+/data/server/nginx/conf.d/*.conf

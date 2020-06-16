@@ -1,0 +1,6 @@
+# 参考资料 https://github.com/jpillora/docker-dnsmasq
+server=114.114.114.114
+server=8.8.8.8
+address=/test1.com/192.168.1.100
+address=/test2.com/127.0.0.1
+address=/test3.com/127.0.0.1

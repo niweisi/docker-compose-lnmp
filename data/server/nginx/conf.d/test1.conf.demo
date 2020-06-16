@@ -1,0 +1,30 @@
+server {
+    listen 80;
+    server_name test1.com test2.com test3.com;
+    root /data/wwwroot/test1;
+    index index.html index.htm index.php;
+    charset utf-8;
+
+    #access_log  logs/payos.access.log  main;
+
+    location / {
+        if (!-e $request_filename) {
+            rewrite  ^(.*)$  /index.php?s=/$1  last;
+            break;
+        }
+    }
+    location ~ \.php$ {
+       fastcgi_pass   php7.3.19:9000; # docer服务名，指定php版本
+       fastcgi_index  index.php;
+
+       fastcgi_split_path_info  ^((?U).+\.php)(/?.+)$;
+       fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+
+       fastcgi_param  PATH_INFO  $fastcgi_path_info;
+       fastcgi_param  PATH_TRANSLATED  $document_root$fastcgi_path_info;
+
+       fastcgi_param  PHP_VALUE  "open_basedir=$document_root:/tmp/:$document_root/../";
+       include        fastcgi_params;
+    }
+
+}
