@@ -10,12 +10,8 @@ services:
       - "./data/wwwroot:/data/wwwroot"
   php7.3.19:
     container_name: php-fpm-7.3.19
-    image: php:7.3.19-fpm
-    volumes:
-      - "./data/wwwroot:/data/wwwroot"
-  php:
-    container_name: php-fpm
-    image: php:fpm
+#    image: php:7.3.19-fpm
+    build: ./data/dockerfiles/php/7.3.19
     volumes:
       - "./data/wwwroot:/data/wwwroot"
   dnsmasq:
@@ -37,7 +33,7 @@ services:
       - "./data/server/dnsmasq/dnsmasq.conf:/etc/dnsmasq.conf" #文件需要提前生成
   mysql8.0.18:
     container_name: mysql8.0.18
-    image: mysql:8.0.18
+    build: ./data/dockerfiles/mysql/8.0.18
     ports:
       - "3306:3306"
     environment:
@@ -45,7 +41,6 @@ services:
       MYSQL_ROOT_HOST: "%"
     volumes:
       - mysql_data:/var/lib/mysql            # 挂载数据目录
-      - mysql_config:/etc/mysql/conf.d      # 挂载配置文件目录
   redis:
     container_name: redis
     image: redis
@@ -54,4 +49,3 @@ services:
       #  /usr/local/etc/redis/redis.conf
 volumes:
   mysql_data:
-  mysql_config:
