@@ -44,6 +44,6 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list_bak \
     && rm ${extName}.tar.gz \
     && docker-php-ext-install /tmp/${extName} \
     && rm -r /tmp/${extName} \
-    && extName=''
-    && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+    && extName='' \
+    && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php --install-dir=/usr/local/bin --filename=composer
