@@ -10,8 +10,8 @@ services:
       - "./data/wwwroot:/data/wwwroot"
   php7.3.19:
     container_name: php-fpm-7.3.19
-#    image: php:7.3.19-fpm
-    build: ./data/dockerfiles/php/7.3.19
+    image: niweisi/php-fpm:7.3.19
+    #    build: ./data/dockerfiles/php/7.3.19
     volumes:
       - "./data/wwwroot:/data/wwwroot"
   dnsmasq:
@@ -40,7 +40,7 @@ services:
       MYSQL_ROOT_PASSWORD: "123456"
       MYSQL_ROOT_HOST: "%"
     volumes:
-      - mysql_data:/var/lib/mysql            # 挂载数据目录
+      - mysql_data_8.0.18:/var/lib/mysql            # 挂载数据目录
   redis:
     container_name: redis
     image: redis
@@ -48,4 +48,4 @@ services:
       - "6379:6379"
       #  /usr/local/etc/redis/redis.conf
 volumes:
-  mysql_data:
+  mysql_data_8.0.18:
