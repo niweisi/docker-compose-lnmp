@@ -1,0 +1,20 @@
+version: '3'
+services:
+  dns:
+    container_name: dns
+    image: jpillora/dnsmasq
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "5380:8080"
+    environment:
+      HTTP_USER: "admin"
+      HTTP_PASS: "123456"
+    logging:
+      driver: json-file
+      options:
+        max-size: "200k" # 单个文件大小为200k
+        max-file: "10" # 最多10个文件
+    volumes:
+      - "./data/server/dnsmasq/dnsmasq.conf:/etc/dnsmasq.conf" #文件需要提前生成
+#    restart: always # 自启动

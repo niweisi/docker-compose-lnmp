@@ -1,0 +1,32 @@
+version: '3'
+services:
+  zabbix-server:
+    container_name: zabbix-server
+    image: zabbix/zabbix-server-mysql
+    environment:
+      - DB_SERVER_HOST=mysql8.0.18
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=123456
+    ports:
+      - '10051:10051'
+  zabbix-web:
+    container_name: zabbix-web
+    image: zabbix/zabbix-web-nginx-mysql
+    environment:
+      - DB_SERVER_HOST=mysql8.0.18
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=123456
+      - ZBX_SERVER_HOST=zabbix-server
+      - PHP_TZ=Asia/Shanghai
+    ports:
+      - '8080:8080'
+      - '8443:8443'
+  zabbix-agent:
+    container_name: zabbix-agent
+    image: zabbix/zabbix-agent
+    environment:
+      - ZBX_SERVER_HOST=zabbix-server
+      - ZBX_HOSTNAME=zabbix_agent
+      - ZBX_SERVER_PORT=10051
+    ports:
+      - '10050:10050'

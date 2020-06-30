@@ -1,0 +1,16 @@
+version: '3'
+services:
+  swoft:
+    container_name: swoft
+    image: swoft/swoft
+    environment:
+      - APP_ENV=dev
+      - TIMEZONE=Asia/Shanghai
+    ports:
+      - "18306:18306"
+      - "18307:18307"
+      - "18308:18308"
+      - "29001:29001"
+    volumes:
+      #      - ./data/wwwroot/tanni-websocket:/var/www/swoft
+      - ./data/wwwroot:/data/wwwroot/

@@ -14,23 +14,8 @@ services:
     #    build: ./data/dockerfiles/php/7.3.19
     volumes:
       - "./data/wwwroot:/data/wwwroot"
-  dnsmasq:
-    container_name: dnsmasq
-    image: jpillora/dnsmasq
     ports:
-      - "53:53/tcp"
-      - "53:53/udp"
-      - "5380:8080"
-    environment:
-      HTTP_USER: "admin"
-      HTTP_PASS: "123456"
-    logging:
-      driver: json-file
-      options:
-        max-size: "200k" # 单个文件大小为200k
-        max-file: "10" # 最多10个文件
-    volumes:
-      - "./data/server/dnsmasq/dnsmasq.conf:/etc/dnsmasq.conf" #文件需要提前生成
+      - "443:443"
   mysql8.0.18:
     container_name: mysql8.0.18
     build: ./data/dockerfiles/mysql/8.0.18
@@ -47,5 +32,8 @@ services:
     ports:
       - "6379:6379"
       #  /usr/local/etc/redis/redis.conf
+#    restart: always # 自启动
+#    depends_on:
+#      - mysql # 此服务先启动
 volumes:
   mysql_data_8.0.18:
