@@ -5,17 +5,17 @@ services:
     image: nginx:1.18.0
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - "./data/server/nginx/conf.d:/etc/nginx/conf.d"
+      - "./data/server/nginx/ssl:/etc/nginx/ssl"
       - "./data/wwwroot:/data/wwwroot"
   php7.3.19:
     container_name: php-fpm-7.3.19
-    image: niweisi/php-fpm:7.3.19
+    image: niweisi/php-fpm-7.3.19:v1.0.0
     #    build: ./data/dockerfiles/php/7.3.19
     volumes:
       - "./data/wwwroot:/data/wwwroot"
-    ports:
-      - "443:443"
   mysql8.0.18:
     container_name: mysql8.0.18
     build: ./data/dockerfiles/mysql/8.0.18
@@ -31,6 +31,8 @@ services:
     image: redis
     ports:
       - "6379:6379"
+#    volumes:
+#      - "/redis/data:/data"
       #  /usr/local/etc/redis/redis.conf
 #    restart: always # 自启动
 #    depends_on:
