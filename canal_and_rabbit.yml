@@ -11,6 +11,7 @@ services:
   rabbit:
     container_name: rabbit
     image: rabbitmq:management
+    build: ./data/dockerfiles/rabbitmq
     ports:
       - 40002:5672
       - 40003:15672
