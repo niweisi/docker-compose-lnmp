@@ -1,0 +1,14 @@
+version: '3'
+services:
+  mysql8.0.18:
+    container_name: mysql8.0.18
+    build: ./data/dockerfiles/mysql/8.0.18
+    ports:
+      - "30000:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_ROOT_HOST: "%"
+    volumes:
+      - mysql_data_8.0.18:/var/lib/mysql            # 挂载数据目录
+volumes:
+  mysql_data_8.0.18:

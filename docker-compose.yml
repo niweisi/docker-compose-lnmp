@@ -1,5 +1,15 @@
 version: '3'
 services:
+  php7.3.19:
+    container_name: php-fpm-7.3.19
+    image: niweisi/php-fpm-7.3.19:v1.0.1
+    #    build: ./data/dockerfiles/php/7.3.19
+    ports:
+      - "9501-9510:9501-9510"
+      - "9000:9000"
+    volumes:
+      - "./data/wwwroot:/data/wwwroot"
+    restart: always # 自启动
   nginx:
     container_name: nginx1.18.0
     image: nginx:1.18.0
@@ -10,12 +20,9 @@ services:
       - "./data/server/nginx/conf.d:/etc/nginx/conf.d"
       - "./data/server/nginx/ssl:/etc/nginx/ssl"
       - "./data/wwwroot:/data/wwwroot"
-  php7.3.19:
-    container_name: php-fpm-7.3.19
-    image: niweisi/php-fpm-7.3.19:v1.0.0
-    #    build: ./data/dockerfiles/php/7.3.19
-    volumes:
-      - "./data/wwwroot:/data/wwwroot"
+    restart: always # 自启动
+    depends_on:
+      - php7.3.19 # 此服务先启动
   mysql8.0.18:
     container_name: mysql8.0.18
     build: ./data/dockerfiles/mysql/8.0.18
@@ -26,16 +33,15 @@ services:
       MYSQL_ROOT_HOST: "%"
     volumes:
       - mysql_data_8.0.18:/var/lib/mysql            # 挂载数据目录
+    restart: always # 自启动
   redis:
     container_name: redis
     image: redis
     ports:
       - "6379:6379"
-#    volumes:
-#      - "/redis/data:/data"
-      #  /usr/local/etc/redis/redis.conf
-#    restart: always # 自启动
-#    depends_on:
-#      - mysql # 此服务先启动
+    restart: always # 自启动
+    #    volumes:
+    #      - "/redis/data:/data"
+    #  /usr/local/etc/redis/redis.conf
 volumes:
   mysql_data_8.0.18:

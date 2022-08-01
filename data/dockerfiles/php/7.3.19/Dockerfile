@@ -15,7 +15,7 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list_bak \
         librabbitmq-dev \
         libssh-dev \
     # 安装扩展
-    && docker-php-ext-install -j$(nproc) bcmath calendar gettext mysqli pdo_mysql sockets \
+    && docker-php-ext-install -j$(nproc) bcmath calendar gettext mysqli pdo_mysql sockets bz2 \
     # 如果安装的扩展需要自定义配置时
     # gd
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
@@ -47,3 +47,13 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list_bak \
     && extName='' \
     && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+    # [ionCube Loader]
+    && extName='ioncube' \
+    && curl -fsSL https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz -o /usr/local/${extName}.tar.gz \
+    && tar -zxvf /usr/local/${extName}.tar.gz \
+    && rm -f /usr/local/${extName}.tar.gz \
+    # zend_extension=/usr/local/ioncube/ioncube_loader_lin_7.3.so
+    # mongodb
+    && pecl install mongodb \
+
+

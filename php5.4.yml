@@ -1,0 +1,13 @@
+version: '3'
+services:
+  php5.4.45:
+    container_name: php-fpm-5.4.45
+    image: php:5.4.45-fpm
+    ports:
+      - "9501-9510"
+      - "9000"
+    volumes:
+      - "./data/wwwroot:/data/wwwroot"
+    restart: always # 自启动
+
+

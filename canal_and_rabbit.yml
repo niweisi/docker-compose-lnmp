@@ -1,13 +1,5 @@
 version: '3'
 services:
-  canal:
-    container_name: canal
-    image: niweisi/canal-server-deployer:v1.1.4
-    ports:
-      - 11111:11111
-    volumes:
-      - ./data/server/canal/canal.properties:/home/admin/canal-server/conf/canal.properties
-      - ./data/server/canal/example/instance.properties:/home/admin/canal-server/conf/example/instance.properties
   rabbit:
     container_name: rabbit
     image: rabbitmq:management
@@ -20,5 +12,11 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=rabbitmgr
       - RABBITMQ_DEFAULT_PASS=M9QWSRXAPZcw2SKu
+  canal:
+    container_name: canal
+    image: niweisi/canal-server-deployer:v1.1.4
+    volumes:
+      - ./data/server/canal/canal.properties:/home/admin/canal-server/conf/canal.properties
+      - ./data/server/canal/example/instance.properties:/home/admin/canal-server/conf/example/instance.properties
 volumes:
   rabbit_data:
