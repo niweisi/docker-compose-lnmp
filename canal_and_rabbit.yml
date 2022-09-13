@@ -4,6 +4,7 @@ services:
     container_name: rabbit
     image: rabbitmq:management
     build: ./data/dockerfiles/rabbitmq
+    restart: always
     ports:
       - 40002:5672
       - 40003:15672
