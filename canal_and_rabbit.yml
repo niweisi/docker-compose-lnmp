@@ -2,7 +2,6 @@ version: '3'
 services:
   rabbit:
     container_name: rabbit
-    image: rabbitmq:management
     build: ./data/dockerfiles/rabbitmq
     restart: always
     ports:
