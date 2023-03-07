@@ -1,7 +1,7 @@
 version: '3'
 services:
   hyperf:
-    image: hyperf/hyperf:8.0-alpine-v3.16-swoole
+    build: ./data/dockerfiles/hyperf
     container_name: hyperf
     ports:
       - "19501-19510:9501-9510"

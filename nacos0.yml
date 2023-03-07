@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  nacos:
+    hostname: nacos
+    container_name: nacos
+    image: nacos/nacos-server:v2.1.1
+    volumes:
+      - /data/nacos/logs:/home/nacos/logs
+    ports:
+      - "8848:8848"
+      - "7848:7848"
+      - "9848:9848"
+      - "9849:9849"
+      - "9555:9555"
+    environment:
+      - MODE=standalone
+      - SPRING_DATASOURCE_PLATFORM=mysql
+      - MYSQL_SERVICE_HOST=mysql8.0.18
+      - MYSQL_SERVICE_DB_NAME=nacos
+      - MYSQL_SERVICE_PORT=3306
+      - MYSQL_SERVICE_USER=root
+      - MYSQL_SERVICE_PASSWORD=123456
+      - MYSQL_SERVICE_DB_PARAM=characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
+      - TIME_ZONE=Asia/Shanghai
+    restart: always
+    user: root

@@ -22,6 +22,8 @@ services:
     volumes:
       - ./data/server/spug/service:/data/spug
       - ./data/server/spug/repos:/data/repos
+      - /var/run/docker.sock:/var/run/docker.sock
+      - $(which docker)r:/bin/docker
     ports:
       # 如果80端口被占用可替换为其他端口，例如: - "8000:80"
       - "18000:80"

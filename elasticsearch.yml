@@ -6,13 +6,38 @@ services:
     environment:
       discovery.type: single-node
       ES_JAVA_OPTS: "-Xms256m -Xmx256m"
-      xpack.security.enabled: "true"
+      xpack.security.enabled: true
       ELASTIC_PASSWORD: "123456"
+      http.cors.enabled: true
+      http.cors.allow-origin: "*"
+      http.cors.allow-headers: "*"
     volumes:
       - es_data01:/usr/share/elasticsearch/data
     ports:
-      - 9200:9200
+      - "9200:9200"
+      - "9300:9300"
     restart: always
+  elasticsearch-head:
+    # http://vhost:9100/?auth_user=elastic&auth_password=123456
+    container_name: elasticsearch-head
+    image: mobz/elasticsearch-head:5-alpine
+    ports:
+      - "9100:9100"
+    restart: always
+    depends_on:
+      - es01 # 此服务先启动
+  kibana:
+    container_name: kibana
+    image: kibana:7.17.8
+    ports:
+      - "5601:5601"
+    environment:
+      - "ELASTICSEARCH_HOSTS=http://es01:9200"
+      - "ELASTICSEARCH_USERNAME=elastic"
+      - "ELASTICSEARCH_PASSWORD=123456"
+    restart: always
+    depends_on:
+      - es01 # 此服务先启动
 volumes:
   es_data01:
     driver: local

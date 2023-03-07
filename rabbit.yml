@@ -1,0 +1,17 @@
+version: '3'
+services:
+  rabbit:
+    container_name: rabbit
+    image: rabbitmq:management
+    build: ./data/dockerfiles/rabbitmq
+    restart: always
+    ports:
+      - 40002:5672
+      - 40003:15672
+    volumes:
+      - rabbit_data:/var/lib/rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=rabbitmgr
+      - RABBITMQ_DEFAULT_PASS=M9QWSRXAPZcw2SKu
+volumes:
+  rabbit_data:
