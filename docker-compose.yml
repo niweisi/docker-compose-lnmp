@@ -17,6 +17,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
+      - "./data/server/nginx/nginx.conf:/etc/nginx/nginx.conf"
       - "./data/server/nginx/conf.d:/etc/nginx/conf.d"
       - "./data/server/nginx/ssl:/etc/nginx/ssl"
       - "./data/wwwroot:/data/wwwroot"
