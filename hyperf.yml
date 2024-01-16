@@ -6,8 +6,8 @@ services:
     ports:
       - "19501-19510:9501-9510"
     volumes:
-      - "./data/wwwroot:/data/wwwroot"
-    restart: always
+      - "/data/wwwroot:/data/wwwroot"
+    # restart: always
     privileged: true
     user: root
     stdin_open: true
