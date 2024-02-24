@@ -1,0 +1,9 @@
+version: "3.7"
+services:
+  shadowsocks:
+    container_name: shadowsocks
+    image: niweisi/shadowsocks
+    #    build: ./data/dockerfiles/shadowsocks
+    ports:
+      - "5001:5000"
+    entrypoint: [ "ss-server", "-s", "0.0.0.0", "-p", "5000", "-k", "BUexxxxx", "-m", "chacha20" ]
