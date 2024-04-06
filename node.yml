@@ -1,0 +1,15 @@
+version: "3.7"
+services:
+  node:
+    container_name: node
+    build: ./data/dockerfiles/node
+    volumes:
+      - "/data/wwwroot:/data/wwwroot"
+      - "/data/proxy:/data/proxy"
+    ports:
+      - "6000-6010:6000-6010"
+    restart: always
+    tty: true
+    environment:
+      - HTTP_PROXY=http://172.26.64.1:1080
+      - HTTPS_PROXY=http://172.26.64.1:1080
