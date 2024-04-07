@@ -1,0 +1,15 @@
+version: "3.7"
+services:
+  node14:
+    container_name: node14
+    image: node:14-alpine
+    volumes:
+      - "/data/wwwroot:/data/wwwroot"
+      - "/data/proxy:/data/proxy"
+    ports:
+      - "6031-6040:6031-6040"
+    restart: always
+    tty: true
+    environment:
+      - HTTP_PROXY=http://172.26.64.1:1080
+      - HTTPS_PROXY=http://172.26.64.1:1080
