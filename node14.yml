@@ -2,7 +2,9 @@ version: "3.7"
 services:
   node14:
     container_name: node14
-    image: node:14-alpine
+    hostname: node14
+    # image: node:14-alpine
+    build: ./data/dockerfiles/node14
     volumes:
       - "/data/wwwroot:/data/wwwroot"
       - "/data/proxy:/data/proxy"
