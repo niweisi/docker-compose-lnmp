@@ -2,7 +2,8 @@ version: '3'
 services:
   php7.3.19:
     container_name: php-fpm-7.3.19
-    image: niweisi/php-fpm-7.3.19:v1.0.1
+    hostname: php-fpm-7.3.19
+    image: niweisi/php-fpm-7.3.19:v1.0.2
     #    build: ./data/dockerfiles/php/7.3.19
     ports:
       - "9501-9510:9501-9510"
@@ -12,6 +13,7 @@ services:
     restart: always # 自启动
   nginx:
     container_name: nginx
+    hostname: nginx
     image: nginx:1.18.0
     ports:
       - "80:80"
@@ -26,6 +28,7 @@ services:
       - php7.3.19 # 此服务先启动
   mysql8.0.18:
     container_name: mysql8.0.18
+    hostname: mysql8.0.18
     build: ./data/dockerfiles/mysql/8.0.18
     ports:
       - "3306:3306"
